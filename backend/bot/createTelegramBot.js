@@ -1,4 +1,5 @@
 const { Telegraf, Markup } = require('telegraf');
+const WEB_APP_URL = process.env.WEB_APP_URL
 
 function createTelegramBot() {
     const createTelegramBot = new Telegraf(process.env.BOT_TOKEN);
@@ -11,7 +12,7 @@ function createTelegramBot() {
                         {
                             text: 'Open Web App',
                             web_app: {
-                                url: 'https://google.com'
+                                url: WEB_APP_URL
                             }
                         }
                     ]
