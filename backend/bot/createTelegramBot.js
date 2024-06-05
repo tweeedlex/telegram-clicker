@@ -4,7 +4,7 @@ const WEB_APP_URL = process.env.WEB_APP_URL
 function createTelegramBot() {
     const createTelegramBot = new Telegraf(process.env.BOT_TOKEN);
 
-    createTelegramBot.start((ctx) => {
+    const replyWithWebApp = (ctx) => {
         ctx.reply('Welcome! Click the button below to open the web app:', {
             reply_markup: {
                 inline_keyboard: [
@@ -19,23 +19,10 @@ function createTelegramBot() {
                 ]
             }
         })
-    });
-    createTelegramBot.on('message', (ctx) => 
-        ctx.reply('Click the button below to open the web app:', {
-            reply_markup: {
-                inline_keyboard: [
-                    [
-                        {
-                            text: 'Open Web App',
-                            web_app: {
-                                url: WEB_APP_URL
-                            }
-                        }
-                    ]
-                ]
-            }
-        })
-    );
+    }
+
+    createTelegramBot.start((ctx) => replyWithWebApp(ctx));
+    createTelegramBot.on('message', (ctx) => replyWithWebApp(ctx));
     createTelegramBot.launch().then(() => {
         console.log('Bot is running');
     });
