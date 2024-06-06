@@ -17,7 +17,6 @@ function App() {
 
   const getInitData = async () => {
     let validatedData = await validateInitData(initData);
-    validatedData.user = JSON.parse(validatedData.user)
     dispatch(setTelegramData(validatedData))
   }
 
