@@ -7,13 +7,13 @@ const Main = () => {
   const [taps, setTaps] = useState(0);
 
   return (
-    <div className={styles.page}>
+    <div className={"page " + styles.mainPage}>
       <header>
         <p>
           Welcome to the elephant clicker, {telegramData ? telegramData?.user?.first_name : ""}!
         </p>
       </header>
-      <main>
+      <div className={styles.block}>
         <button className={styles.button} onClick={() => setTaps(taps => taps + 1)}>
           <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg" alt="slon" width={250} />
         </button>
@@ -28,7 +28,7 @@ const Main = () => {
             times.
           </p>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

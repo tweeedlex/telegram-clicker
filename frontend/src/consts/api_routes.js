@@ -1,3 +1,3 @@
 export default {
-    GET_USER: "/user"
+    VALIDATE_INIT_DATA: "/user"
 }
