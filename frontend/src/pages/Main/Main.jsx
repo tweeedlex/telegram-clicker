@@ -10,7 +10,7 @@ const Main = () => {
     <div className={styles.page}>
       <header>
         <p>
-          Welcome to the elephant clicker, {telegramData ? telegramData?.user.first_name : ""}!
+          Welcome to the elephant clicker, {telegramData ? telegramData?.user?.first_name : ""}!
         </p>
       </header>
       <main>

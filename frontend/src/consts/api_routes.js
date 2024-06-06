@@ -1,3 +1,3 @@
 export default {
-    VALIDATE_USER: "/user/validate"
+    GET_USER: "/user"
 }

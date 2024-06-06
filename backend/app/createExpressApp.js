@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const expressWinston = require("express-winston");
 const apiRouter = require("./api/createApiRouter.js")();
 const cors = require("cors");
+const authMiddleware = require("./middlewares/authMiddleware.js");
+const userDataMiddleware = require("./middlewares/userDataMiddleware.js");
 
 module.exports = ({ database, logger }) =>
   express()
@@ -26,6 +28,8 @@ module.exports = ({ database, logger }) =>
         origin: "*",
       })
     )
+    .use(authMiddleware)
+    .use(userDataMiddleware)
     .use("/", express.static(__dirname + "/public"))
     .use("/api", apiRouter)
     .use((req, res) => res.sendStatus(404))

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { validateUser } from "./http/user";
+import { validateInitData } from "./http/user";
 import { Routes, Route } from "react-router-dom";
 import Main from "./pages/Main/Main";
 import routes from "./consts/page_routes";
@@ -12,12 +12,11 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    validateInitData()
+    getInitData()
   }, [])
 
-  const validateInitData = async () => {
-    let validatedData = await validateUser(initData);
-    validatedData = window.Telegram.Utils.urlParseQueryString(validatedData);
+  const getInitData = async () => {
+    let validatedData = await validateInitData(initData);
     validatedData.user = JSON.parse(validatedData.user)
     dispatch(setTelegramData(validatedData))
   }

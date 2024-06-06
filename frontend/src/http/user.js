@@ -1,16 +1,8 @@
-const API_URL = import.meta.env.VITE_API_URL;
 import routes from "../consts/api_routes";
-import axios from "axios";
-
-export const validateUser = async (initData) => {
+import api from "./config";
+export const validateInitData = async () => {
     try {
-        const response = await axios.get(`${API_URL}${routes.VALIDATE_USER}`,
-          {
-              headers: {
-                  'tg-init-data': initData
-              }
-          }
-        );
+        const response = await api.get(routes.GET_USER)
         return response.data;
     } catch (e) {
         return e;
