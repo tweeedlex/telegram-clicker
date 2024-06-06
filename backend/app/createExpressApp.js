@@ -28,9 +28,9 @@ module.exports = ({ database, logger }) =>
         origin: "*",
       })
     )
+    .use("/", express.static(__dirname + "/public"))
     .use(authMiddleware)
     .use(userDataMiddleware)
-    .use("/", express.static(__dirname + "/public"))
     .use("/api", apiRouter)
     .use((req, res) => res.sendStatus(404))
     .use((error, req, res, next) => {
