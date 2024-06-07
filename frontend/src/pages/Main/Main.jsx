@@ -6,12 +6,14 @@ const Main = () => {
   const telegramData = useSelector((state) => state.telegramData);
   const [taps, setTaps] = useState(0);
   const [energy, setEnergy] = useState(1500);
+
   const saveTaps = () => {
     setTaps(taps => taps + 1)
     setEnergy(energy => energy - 1)
     localStorage.setItem("taps", taps + 1);
     localStorage.setItem("energy", energy - 1);
   }
+
   useEffect(() => {
     if (localStorage.getItem("taps") && localStorage.getItem("taps") != null){
       setTaps(+localStorage.getItem("taps"))
@@ -32,13 +34,13 @@ const Main = () => {
         </button>
         <div>
           <p>
-            You have clicked
+            Your balance
           </p>
           <p style={{fontSize: 40}}>
                {taps}
           </p>
           <p>
-            times.
+            dollars.
           </p>
         </div>
         <div>

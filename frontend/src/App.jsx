@@ -6,6 +6,7 @@ import routes from "./consts/page_routes";
 import { useDispatch } from "react-redux";
 import {setTelegramData} from "./store/slice";
 import Footer from "./components/Footer/Footer";
+import Mine from "./pages/Mine/Mine";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function App() {
       <main>
         <Routes>
           <Route path={routes.MAIN} element={<Main />} />
-          <Route path={routes.MINE} element={<p>Mining cards here</p>} />
+          <Route path={routes.MINE} element={<Mine />} />
           <Route path={routes.PROFILE} element={<p>Profile here</p>}/>
         </Routes>
       </main>

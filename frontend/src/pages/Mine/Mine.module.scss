@@ -1,0 +1,50 @@
+.minePage {
+  justify-content: start;
+  min-height: 100vh;
+}
+
+.categories {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  height: 50px;
+  background-color: #555;
+  justify-content: space-between;
+}
+
+.category {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #666;
+  padding: 0 10px;
+  color: #fff;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 10px;
+  padding: 20px 0;
+  justify-content: space-between;
+}
+
+.card {
+  width: calc(50% - 5px);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  background-color: #555;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #777;
+  cursor: pointer;
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+}
