@@ -6,6 +6,7 @@ import routes from "./consts/page_routes";
 import { useDispatch } from "react-redux";
 import {setTelegramData} from "./store/slice";
 import Footer from "./components/Footer/Footer";
+import Debug from "./components/Debug/Debug";
 import Mine from "./pages/Mine/Mine";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className="App">
+      <Debug />
       <main>
         <Routes>
           <Route path={routes.MAIN} element={<Main />} />

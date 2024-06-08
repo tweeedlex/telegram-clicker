@@ -5,6 +5,8 @@ const apiRouter = require("./api/createApiRouter.js")();
 const cors = require("cors");
 const authMiddleware = require("./middlewares/authMiddleware.js");
 const userDataMiddleware = require("./middlewares/userDataMiddleware.js");
+const adminMiddleware = require("./middlewares/adminMiddleware.js");
+const ApiError = require("./exceptions/api-error.js")
 
 module.exports = ({ database, logger }) =>
   express()
@@ -21,6 +23,7 @@ module.exports = ({ database, logger }) =>
       req.base = `${req.protocol}://${req.get("host")}`;
       req.logger = logger;
       req.db = database;
+      req.ApiError = ApiError
       return next();
     })
     .use(
@@ -31,10 +34,11 @@ module.exports = ({ database, logger }) =>
     .use("/", express.static(__dirname + "/public"))
     .use(authMiddleware)
     .use(userDataMiddleware)
+    .use("/api/admin", adminMiddleware)
     .use("/api", apiRouter)
     .use((req, res) => res.sendStatus(404))
     .use((error, req, res, next) => {
-      logger.error(error, error);
+      logger.error(error);
       return error.errors
         ? res.status(400).json(error)
         : res.status(error.status).send(error.message);
