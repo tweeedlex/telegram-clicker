@@ -1,25 +1,32 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from "./Mine.module.scss";
+import {getAllCategories} from "../../http/category";
 
 const Mine = () => {
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    getCategories()
+  })
+
+  const getCategories = async () => {
+    const data = await getAllCategories()
+    setCategories(data)
+  }
+
   return (
     <div className={"page " + styles.minePage}>
       <div className={styles.categories}>
-        <button className={styles.category}>
-          Category 1
-        </button>
-        <button className={styles.category}>
-          Category 2
-        </button>
-        <button className={styles.category}>
-          Category 3
-        </button>
-        <button className={styles.category}>
-          Category 4
-        </button>
+        {
+          categories.map((category) => (
+            <button key={category._id} className={styles.category}>
+              {category.name}
+            </button>
+          ))
+        }
       </div>
       <div className={styles.cards}>
-        <div className={styles.card}>
+      <div className={styles.card}>
           <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg" alt="slon"/>
           <p>
             Elephant

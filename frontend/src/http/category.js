@@ -12,7 +12,7 @@ export const createCategory = async (name) => {
 
 export const deleteCategory = async (id) => {
   try {
-    const response = await api.delete(routes.ADMIN_CATEGORY, { id })
+    const response = await api.delete(routes.ADMIN_CATEGORY, { data: { id } })
     return response.data;
   } catch (e) {
     return e;

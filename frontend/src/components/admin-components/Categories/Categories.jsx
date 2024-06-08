@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Modal from "../../Modal/Modal";
 import styles from "./Categories.module.scss";
-import { createCategory, getAllCategories } from "../../../http/category";
+import {createCategory, deleteCategory, getAllCategories} from "../../../http/category";
 
 const Categories = () => {
   const [showCategoriesModal, setShowCategoriesModal] = useState(false);
@@ -18,9 +18,15 @@ const Categories = () => {
   }
 
   const handleCreateCategory = async () => {
-    await createCategory(newCategory)
-    setCategories([...categories, {name: newCategory}])
+    const createdCategory = await createCategory(newCategory)
+    setCategories([...categories, createdCategory])
     setNewCategory("")
+  }
+
+  const handleDeleteCategory = async (id) => {
+    console.log(categories)
+    await deleteCategory(id)
+    await getCategories()
   }
 
   return (
@@ -58,6 +64,7 @@ const Categories = () => {
                     </button>
                     <button
                       className={"button-default " + styles.categoryButton}
+                      onClick={() => handleDeleteCategory(category._id)}
                     >
                       Delete
                     </button>
