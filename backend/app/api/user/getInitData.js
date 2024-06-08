@@ -4,7 +4,9 @@ module.exports = Router({ mergeParams: true }).get(
   "/user",
   async (req, res, next) => {
     try {
-      return res.json(req.initData);
+      const { initData, user } = req;
+      initData.user = user;
+      return res.json(initData);
     } catch (error) {
       next(error);
     }

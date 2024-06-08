@@ -1,7 +1,7 @@
 import React from 'react';
 import api from "../../http/config";
 
-const Debug = () => {
+const Debug = ({isVisible}) => {
   const testAdminMiddleware = async () => {
     const response = await api.get("/admin");
     console.log(response)
@@ -22,13 +22,20 @@ const Debug = () => {
   }
 
   return (
-    <div>
-      <button
-        onClick={() => testRequests()}
-      >
-        Test request
-      </button>
-    </div>
+    <>
+      {
+        isVisible &&
+        (
+          <div>
+            <button
+              onClick={() => testRequests()}
+            >
+              Test request
+            </button>
+          </div>
+        )
+      }
+    </>
   );
 };
 

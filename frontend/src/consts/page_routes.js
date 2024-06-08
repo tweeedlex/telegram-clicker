@@ -1,5 +1,6 @@
 export default {
   MAIN: "/",
   MINE: "/mine",
-  PROFILE: "/profile"
+  PROFILE: "/profile",
+  ADMIN: "/admin"
 }

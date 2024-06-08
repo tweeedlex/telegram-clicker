@@ -1,0 +1,34 @@
+.categoriesButton {
+  margin: 10px 0 0 0;
+}
+
+.category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    background-color: #666;
+    color: #fff;
+    padding: 0 10px;
+}
+
+.categoriesList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.createCategoryInput {
+  width: 100%;
+}
+
+.createCategory {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.categoryButton {
+  margin-left: 5px;
+}
