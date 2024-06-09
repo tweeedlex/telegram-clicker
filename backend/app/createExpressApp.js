@@ -7,6 +7,7 @@ const authMiddleware = require("./middlewares/authMiddleware.js");
 const userDataMiddleware = require("./middlewares/userDataMiddleware.js");
 const adminMiddleware = require("./middlewares/adminMiddleware.js");
 const ApiError = require("./exceptions/api-error.js")
+const fileUpload = require("express-fileupload");
 
 module.exports = ({ database, logger }) =>
   express()
@@ -34,6 +35,7 @@ module.exports = ({ database, logger }) =>
     .use("/", express.static(__dirname + "/public"))
     .use(authMiddleware)
     .use(userDataMiddleware)
+    .use(fileUpload())
     .use("/api/admin", adminMiddleware)
     .use("/api", apiRouter)
     .use((req, res) => res.sendStatus(404))

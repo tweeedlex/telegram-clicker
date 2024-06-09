@@ -25,14 +25,9 @@ const Categories = () => {
   }
 
   const handleDeleteCategory = async (id) => {
-    console.log(categories)
     await deleteCategory(id)
     await getCategories()
   }
-
-  useEffect(() => {
-    console.log(editingCategories)
-  }, [editingCategories]);
 
   const handleStartEditingCategory = (name, _id) => {
     setEditingCategories([...editingCategories, {_id, name}])

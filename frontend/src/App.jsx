@@ -4,7 +4,7 @@ import {Routes, Route, Link} from "react-router-dom";
 import Main from "./pages/Main/Main";
 import routes from "./consts/page_routes";
 import {useDispatch, useSelector} from "react-redux";
-import {setTelegramData} from "./store/slice";
+import {setTelegramData, setIsAdmin} from "./store/slice";
 import Footer from "./components/Footer/Footer";
 import Debug from "./components/Debug/Debug";
 import Mine from "./pages/Mine/Mine";
@@ -21,6 +21,7 @@ function App() {
   const getInitData = async () => {
     let validatedData = await validateInitData();
     dispatch(setTelegramData(validatedData))
+    dispatch(setIsAdmin(validatedData?.user?.roles.includes("ADMIN")))
   }
 
   return (

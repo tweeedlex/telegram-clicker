@@ -4,14 +4,20 @@ import {getAllCategories} from "../../http/category";
 
 const Mine = () => {
   const [categories, setCategories] = useState([])
+  const [activeCategory, setActiveCategory] = useState(null)
 
   useEffect(() => {
     getCategories()
   }, [])
 
+  useEffect(() => {
+    // fetch cards by activeCategory
+  }, [activeCategory]);
+
   const getCategories = async () => {
     const data = await getAllCategories()
     setCategories(data)
+    setActiveCategory(data[0]._id)
   }
 
   return (
@@ -19,7 +25,11 @@ const Mine = () => {
       <div className={styles.categories}>
         {
           categories.map((category) => (
-            <button key={category._id} className={styles.category}>
+            <button
+              key={category._id}
+              className={styles.category + " " + (activeCategory === category._id ? styles.active : "")}
+              onClick={() => setActiveCategory(category._id)}
+            >
               {category.name}
             </button>
           ))
