@@ -7,7 +7,7 @@ const Mine = () => {
 
   useEffect(() => {
     getCategories()
-  })
+  }, [])
 
   const getCategories = async () => {
     const data = await getAllCategories()

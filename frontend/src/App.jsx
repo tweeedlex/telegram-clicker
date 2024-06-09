@@ -20,7 +20,6 @@ function App() {
 
   const getInitData = async () => {
     let validatedData = await validateInitData();
-    console.log(validatedData)
     dispatch(setTelegramData(validatedData))
   }
 
