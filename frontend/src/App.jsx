@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      <Debug isVisible={false} />
+      {/*<Debug isVisible={true} />*/}
       <main>
         <Routes>
           <Route path={routes.MAIN} element={<Main />} />

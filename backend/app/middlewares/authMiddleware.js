@@ -4,7 +4,6 @@ const ApiError = require("../exceptions/api-error");
 module.exports = (req, res, next) => {
   try {
     const initData = req.headers["tg-init-data"]
-    console.log(initData)
     const isDataValid = verifyInitData(initData);
 
     if (!isDataValid) {

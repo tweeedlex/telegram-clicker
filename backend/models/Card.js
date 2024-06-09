@@ -5,4 +5,5 @@ const cardSchema = (module.exports = mongoose.Schema({
   img: {type: String, default: "" },
   initialPrice: { type: Number, default: 0 },
   initialIncome: { type: Number, default: 0 },
+  categoryId: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
 }));

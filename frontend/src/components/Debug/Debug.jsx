@@ -1,24 +1,8 @@
 import React from 'react';
-import api from "../../http/config";
+import { createCard } from "../../http/card";
 
 const Debug = ({isVisible}) => {
-  const testAdminMiddleware = async () => {
-    const response = await api.get("/admin");
-    console.log(response)
-  }
-
-  const testCreateCategory = async () => {
-    const response = await api.post("/admin/category", { name: "Test category" });
-    console.log(response)
-  }
-
-  const testGetAllCategories = async () => {
-    const response = await api.get("/category");
-    console.log(response)
-  }
-
   const testRequests = async () => {
-    await testGetAllCategories();
   }
 
   return (
@@ -29,6 +13,7 @@ const Debug = ({isVisible}) => {
           <div>
             <button
               onClick={() => testRequests()}
+              className={"button-default"}
             >
               Test request
             </button>
