@@ -1,29 +1,19 @@
 import routes from "../consts/api_routes";
-import api from "./config";
+import apiRequest from "./config";
 
-export const createCategory = async (name) => {
-  try {
-    const response = await api.post(routes.ADMIN_CATEGORY, { name })
-    return response.data;
-  } catch (e) {
-    return e;
-  }
+export const createCategory = (name) => {
+  return apiRequest('post', routes.ADMIN_CATEGORY, {}, { name });
 }
 
-export const deleteCategory = async (id) => {
-  try {
-    const response = await api.delete(routes.ADMIN_CATEGORY, { data: { id } })
-    return response.data;
-  } catch (e) {
-    return e;
-  }
+export const deleteCategory = (id) => {
+  return apiRequest('delete', routes.ADMIN_CATEGORY, { data: { id } });
 }
 
-export const getAllCategories = async () => {
-  try {
-    const response = await api.get(routes.CATEGORY)
-    return response.data;
-  } catch (e) {
-    return e;
-  }
+export const updateCategory = (id, name) => {
+  return apiRequest('put', routes.ADMIN_CATEGORY, {}, { id, name });
 }
+
+export const getAllCategories = () => {
+  return apiRequest('get', routes.CATEGORY);
+}
+
