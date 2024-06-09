@@ -5,7 +5,6 @@ module.exports = Router({ mergeParams: true }).delete(
   async (req, res, next) => {
     try {
       const { id } = req.body;
-      console.log(id)
       const { db, ApiError } = req;
 
       if (!id) {

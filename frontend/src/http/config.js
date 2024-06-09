@@ -9,4 +9,21 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export default api;
+const apiRequest = async (method, route, options = {}, body = null) => {
+  try {
+    const config = { ...options };
+    if (body) {
+      config.data = body;
+    }
+    const response = await api.request({
+      method,
+      url: route,
+      ...config,
+    });
+    return response.data;
+  } catch (e) {
+    return e;
+  }
+};
+
+export default apiRequest;
