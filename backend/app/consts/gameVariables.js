@@ -1,0 +1,5 @@
+module.exports = {
+  ENERGY_LIMIT: 1500,
+  ENERGY_RECOVERY_INTERVAL: 3000,
+  ENERGY_RECOVERY: 3,
+}

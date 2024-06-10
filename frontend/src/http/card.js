@@ -1,4 +1,4 @@
-import routes from "../consts/api_routes";
+import routes from "../consts/apiRoutes";
 import apiRequest from "./config";
 
 export const createCard = (formData) => {

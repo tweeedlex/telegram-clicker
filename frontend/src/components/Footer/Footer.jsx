@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import routes from "../../consts/page_routes";
+import routes from "../../consts/pageRoutes";
 import styles from "./Footer.module.scss";
 import mainIcon from "../../img/footer/main.png"
 import mineIcon from "../../img/footer/mine.png"

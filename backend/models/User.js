@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const userSchema = (module.exports = mongoose.Schema({
-  id: { type: Number, require: true, default: 0 },
+  id: { type: Number, require: true, default: 0, unique: true },
   username: { type: String, require: true, default: "" },
   first_name: { type: String, default: "" },
   money: {type: Number, default: 0},

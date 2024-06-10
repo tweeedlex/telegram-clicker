@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { validateInitData } from "./http/user";
 import {Routes, Route, Link} from "react-router-dom";
 import Main from "./pages/Main/Main";
-import routes from "./consts/page_routes";
+import routes from "./consts/pageRoutes";
 import {useDispatch, useSelector} from "react-redux";
 import {setTelegramData, setIsAdmin} from "./store/slice";
 import Footer from "./components/Footer/Footer";
