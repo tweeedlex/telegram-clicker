@@ -43,7 +43,6 @@ module.exports = Router({mergeParams: true}).post(
         },
         {new: true}
       );
-      console.log(updatedUser)
 
       return res.json(updatedUser);
     } catch (error) {

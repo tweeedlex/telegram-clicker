@@ -8,8 +8,9 @@ module.exports = Router({ mergeParams: true }).post(
     try {
       const { name, initialPrice, initialIncome, categoryId } = req.body;
       const { db, ApiError } = req;
+      console.log(name, initialPrice, initialIncome, categoryId)
 
-      if (!name || !req.files?.img || !initialPrice || !initialIncome, !categoryId) {
+      if (!name || !req.files?.img || !initialPrice || !initialIncome || !categoryId) {
         return ApiError.BadRequest("Card name, img, initialPrice, categoryId, and initialIncome are required");
       }
 

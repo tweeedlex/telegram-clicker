@@ -5,6 +5,7 @@ import Debug from "../../components/Debug/Debug";
 import {getCards} from "../../http/card";
 import {useSelector} from "react-redux";
 import CreateCard from "../../components/admin-components/CreateCard/CreateCard";
+import EditCard from "../../components/admin-components/EditCard/EditCard";
 
 const Mine = () => {
   const [categories, setCategories] = useState([])
@@ -63,6 +64,11 @@ const Mine = () => {
               <p>
                 +${card.initialIncome}/s
               </p>
+              {
+                isAdmin && (
+                  <EditCard categoryId={activeCategory} card={card} getCards={handleGetCards} />
+                )
+              }
             </div>
           ))
         }

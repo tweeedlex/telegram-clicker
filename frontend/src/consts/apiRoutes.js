@@ -4,5 +4,5 @@ export default {
     CATEGORY: "/category",
     ADMIN_CARD: "/admin/card",
     CARD: "/card",
-    USER_MONEY: "/user/money",
+    USER_MONEY: "/user/money"
 }

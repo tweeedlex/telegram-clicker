@@ -17,7 +17,7 @@ const Modal = ({ show, onClose, title, children }) => {
           {children}
         </div>
         <div className={styles.modalFooter}>
-          <button onClick={onClose} className={styles.closeButton}>Close</button>
+          <button onClick={onClose} className={"button-default"}>Close</button>
         </div>
       </div>
     </div>
