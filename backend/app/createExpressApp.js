@@ -41,7 +41,7 @@ module.exports = ({ database, logger }) =>
     .use((req, res) => res.sendStatus(404))
     .use((error, req, res, next) => {
       logger.error(error);
-      return error.errors
+      return error.status
         ? res.status(400).json(error)
-        : res.status(error.status).send(error.message);
+        : res.status(error?.status).json(error?.message);
     });

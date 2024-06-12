@@ -8,6 +8,7 @@ export const dataSlice = createSlice({
   },
   reducers: {
     setTelegramData: (state, action) => {
+      console.log("reducer:", action.payload);
       state.telegramData = action.payload;
     },
     setIsAdmin: (state, action) => {

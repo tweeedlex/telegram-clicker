@@ -21,6 +21,7 @@ function App() {
   const getInitData = async () => {
     let validatedData = await validateInitData();
     dispatch(setTelegramData(validatedData))
+    console.log("setIsAdmin")
     dispatch(setIsAdmin(validatedData?.user?.roles.includes("ADMIN")))
   }
 

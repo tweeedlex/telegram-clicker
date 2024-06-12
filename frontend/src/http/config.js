@@ -22,7 +22,7 @@ const apiRequest = async (method, route, options = {}, body = null) => {
     });
     return response.data;
   } catch (e) {
-    return e;
+    return {error: e, status: e.response?.status, data: e.response?.data};
   }
 };
 

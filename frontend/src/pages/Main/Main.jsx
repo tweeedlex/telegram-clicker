@@ -70,6 +70,7 @@ const Main = () => {
 
   useEffect(() => {
     if (telegramData?.user && !firstSynced) {
+      console.log("user", telegramData.user);
       setMoney(telegramData.user.money);
       setEnergy(telegramData.user.availableTaps);
       firstSynced = true;
