@@ -6,6 +6,7 @@
     first_name: { type: String, default: "" },
     money: {type: Number, default: 0},
     availableTaps: {type: Number, default: 1500},
+    from_user: {type: Number, default: 0},
     multiplier: {type: Number, default: 1},
     last_money_request_timestamp: {type: Number, default: 0},
     roles: { type: Array, default: ["USER"] },

@@ -1,10 +1,23 @@
 const { Telegraf, Markup } = require('telegraf');
+const Hashids = require('hashids')
+const hashids = new Hashids(process.env.HASHIDS_TOKEN, 10)
+
 const WEB_APP_URL = process.env.WEB_APP_URL
 
 function createTelegramBot() {
+    // console.log(hashids.encode(5643672679))
     const createTelegramBot = new Telegraf(process.env.BOT_TOKEN);
-
-    const replyWithWebApp = (ctx) => {
+    const replyWithWebApp = (ctx, fromCommand=false) => {
+        let fromUrlParam = ''
+        if (fromCommand) {
+            let from = ctx.text.split(' ')[1]
+            if (from) {
+                let decoded = hashids.decode(from)
+                if (decoded[0]) {
+                    fromUrlParam = `?from=${decoded[0]}`
+                }
+            }
+        }
         ctx.reply('Welcome! Click the button below to open the web app:', {
             reply_markup: {
                 inline_keyboard: [
@@ -12,7 +25,7 @@ function createTelegramBot() {
                         {
                             text: 'Open Web App',
                             web_app: {
-                                url: WEB_APP_URL
+                                url: WEB_APP_URL + fromUrlParam
                             }
                         }
                     ]
@@ -21,7 +34,7 @@ function createTelegramBot() {
         })
     }
 
-    createTelegramBot.start((ctx) => replyWithWebApp(ctx));
+    createTelegramBot.start((ctx) => replyWithWebApp(ctx, true));
     createTelegramBot.on('message', (ctx) => replyWithWebApp(ctx));
     createTelegramBot.launch().then(() => {
         console.log('Bot is running');

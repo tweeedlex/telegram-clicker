@@ -19,6 +19,7 @@
     "express-validation": "^1.0.2",
     "express-winston": "^2.5.1",
     "glob": "^7.1.2",
+    "hashids": "^2.3.0",
     "joi": "^13.7.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.11",
