@@ -17,7 +17,6 @@ function App() {
   useEffect(() => {
     getInitData()
   }, [])
-
   const getInitData = async () => {
     let validatedData = await validateInitData();
     dispatch(setTelegramData(validatedData))

@@ -2,7 +2,13 @@ import routes from "../consts/apiRoutes";
 import apiRequest from "./config";
 
 export const validateInitData = () => {
-    return apiRequest('get', routes.VALIDATE_INIT_DATA);
+    const urlParams = new URLSearchParams(window.location.search);
+    const from = urlParams.get('from');
+    let fromUrlParam = ''
+    if (from) {
+        fromUrlParam = `?from=${from}`
+    }
+    return apiRequest('get', routes.VALIDATE_INIT_DATA + fromUrlParam);
 }
 
 export const syncMoney = async (money, dispatch, telegramData, setTelegramData) => {
