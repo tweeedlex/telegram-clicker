@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import CreateCard from "../../components/admin-components/CreateCard/CreateCard";
 import EditCard from "../../components/admin-components/EditCard/EditCard";
 import {setTelegramData} from "../../store/slice";
+import gameVariables from "../../consts/gameVariables";
 
 const Mine = () => {
   const [categories, setCategories] = useState([])
@@ -43,9 +44,18 @@ const Mine = () => {
     }
 
     const {user, newUserCard} = data;
+
     dispatch(setTelegramData({...telegramData, user}))
     localStorage.setItem("money", user.money)
     localStorage.setItem("energy", user.availableTaps)
+
+    const newCards = cards.map(card => {
+      if (card._id === cardId) {
+        card.userCard = newUserCard
+      }
+      return card
+    });
+    setCards(newCards)
   }
 
   return (
@@ -74,10 +84,24 @@ const Mine = () => {
                 {card.name}
               </p>
               <p>
-                ${card.initialPrice}
+                Price: ${
+                  card.userCard
+                    ? (card.initialPrice * Math.pow(gameVariables.CARD_UPGRADE_MULTIPLIER, card.userCard?.level + 1)).toFixed(2)
+                    : card.initialPrice
+                }
               </p>
               <p>
-                +${card.initialIncome}/hour
+                New profit: + ${
+                card.userCard
+                  ? (card.initialIncome * Math.pow(gameVariables.CARD_INCOME_MULTIPLIER, card.userCard?.level + 1)).toFixed(2)
+                  : card.initialIncome
+                }/h
+              </p>
+              <p>
+                {card.userCard?.level
+                  ? `Level: ${card.userCard?.level}`
+                  : "Not purchased"
+                }
               </p>
               {
                 isAdmin && (
