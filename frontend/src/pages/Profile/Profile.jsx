@@ -1,29 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { useSelector, useDispatch } from "react-redux";
 
 const Profile = () => {
 	const telegramData = useSelector((state) => state.telegramData)
-	const urlInput = document.getElementById("refURL");
 
 	const copyRefURL = () => {
-		if (urlInput){
-			urlInput.select();
-	  		document.execCommand("copy");
-  		}
+		const refURL = refUrlRef.current.textContent
+		const additionalText = `🔥🔥🔥 Join elephants army with my referal link and get 100k dollars on your credit card 💸💰🤑`
+		navigator.clipboard.writeText(`${additionalText}\n${refURL}`);
 	}
 
-	useEffect(() => {
-		if (urlInput){
-    		urlInput.value = telegramData.refURL;
-		}
-  	}, [telegramData])
+	const refUrlRef = useRef(null);
 
 	return (
 		<>
-			Invite friends:
+			Invite friends!
 			<div>
-				<input id="refURL" type="text" readOnly="true" value={telegramData.refURL} />
-				<button onClick={copyRefURL}>Copy</button>
+				<p ref={refUrlRef} id="refURL">{telegramData.refURL}</p>
+				<button onClick={copyRefURL} className={"button-default"}>Copy ref link</button>
 			</div>
 		</>
 	)

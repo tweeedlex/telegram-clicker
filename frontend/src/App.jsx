@@ -18,8 +18,10 @@ function App() {
   useEffect(() => {
     getInitData()
   }, [])
+
   const getInitData = async () => {
-    let validatedData = await validateInitData();
+    const urlParams = new URLSearchParams(window.location.search);
+    let validatedData = await validateInitData(urlParams.get('from'));
     dispatch(setTelegramData(validatedData))
     console.log("setIsAdmin")
     console.log("refURL", validatedData.refURL)
