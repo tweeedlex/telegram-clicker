@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const uuid = require("uuid");
 const fs = require("fs");
+const path = require('node:path');
 
 module.exports = Router({ mergeParams: true }).put(
   "/admin/card/:id",
@@ -21,7 +22,7 @@ module.exports = Router({ mergeParams: true }).put(
         const img = req.files.img;
         const extension = img.name.split(".")[1];
         imgName = `${uuid.v4()}.${extension}`;
-        const imgFolder = `${__dirname}/../../../../public/img/`;
+        const imgFolder = path.resolve(`${__dirname}/../../../../public/img/`);
         const imgPath = `${imgFolder}${imgName}`;
 
         // Make directory if not exist
