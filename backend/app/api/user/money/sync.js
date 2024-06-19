@@ -49,9 +49,9 @@ module.exports = Router({mergeParams: true}).post(
         },
         {new: true}
       );
-      uUser = {}
-      uUser.income_per_hour_by_cards = totalIncomePerHour;
-      return res.json(Object.assign(uUser, updatedUser._doc));
+      updatedUser._doc.income_per_hour_by_cards = totalIncomePerHour;
+      console.log(updatedUser)
+      return res.json(updatedUser);
     } catch (error) {
       next(error);
     }
