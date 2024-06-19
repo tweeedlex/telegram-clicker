@@ -47,7 +47,19 @@ const Main = () => {
   const setSyncIntervals = () => {
     intervals.push(setInterval(syncWithServerIfNeeded, gameVariables.SYNC_INTERVAL));
     intervals.push(setInterval(recoverEnergy, gameVariables.ENERGY_RECOVERY_INTERVAL));
+    intervals.push(setInterval(addPassiveIncome, 1000))
   };
+
+  const addPassiveIncome = () => {
+    setMoney((money) => {
+      let newMoney = money;
+      const passiveIncome = telegramData?.user?.income_per_hour_by_cards || localStorage.getItem("passive_income");
+      if (passiveIncome) {
+        newMoney = money + passiveIncome / 3600;
+      }
+      return newMoney;
+    });
+  }
 
   const syncWithServerIfNeeded = async () => {
     if (+localStorage.getItem('energy') < gameVariables.ENERGY_LIMIT) {
@@ -73,6 +85,8 @@ const Main = () => {
       console.log("user", telegramData.user);
       setMoney(telegramData.user.money);
       setEnergy(telegramData.user.availableTaps);
+      localStorage.setItem("money", telegramData.user.money)
+      localStorage.setItem("energy", telegramData.user.availableTaps)
       firstSynced = true;
     }
   }, [telegramData]);
@@ -100,11 +114,14 @@ const Main = () => {
         </button>
         <div>
           <p>Your balance</p>
-          <p style={{ fontSize: 40 }}>{money}</p>
+          <p style={{ fontSize: 40 }}>{Math.floor(money)}</p>
           <p>dollars.</p>
         </div>
         <div>
           <p>Energy: {energy}</p>
+        </div>
+        <div>
+          Passive income: ${(telegramData?.user?.income_per_hour_by_cards || localStorage.getItem("passive_income")) ?? 0}/h
         </div>
       </div>
     </div>

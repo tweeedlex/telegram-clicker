@@ -32,13 +32,17 @@ module.exports = Router({mergeParams: true}).post(
       if (newAvailableTaps > gameVariables.ENERGY_LIMIT) {
         newAvailableTaps = gameVariables.ENERGY_LIMIT;
       }
-      let userCards = await db.UserCard.find({userId: user._id})
+
+      const cards = await db.Card.find({});
+      let userCards = await db.UserCard.find({userId: user._id});
       let totalIncomePerHour = 0;
-      for(var i = 0; i < userCards.length; i++){
-        let card = await db.Card.findById(userCards[i].cardId)
-        let income = card.initialIncome * Math.pow(gameVariables.CARD_INCOME_MULTIPLIER, userCards[i].level + 1)
+
+      userCards.forEach(userCard => {
+        let card = cards.find(card => card._id.equals(userCard.cardId));
+        let income = card.initialIncome * Math.pow(gameVariables.CARD_INCOME_MULTIPLIER, userCard.level + 1);
         totalIncomePerHour += Math.trunc(income);
-      }
+      });
+
       let incomePerMissingTime = Math.trunc((totalIncomePerHour / 3600) * Math.ceil(timeBetweenRequests / 1000))
       let updatedUser = await db.User.findOneAndUpdate(
         {id: user.id},
@@ -50,7 +54,6 @@ module.exports = Router({mergeParams: true}).post(
         {new: true}
       );
       updatedUser._doc.income_per_hour_by_cards = totalIncomePerHour;
-      console.log(updatedUser)
       return res.json(updatedUser);
     } catch (error) {
       next(error);

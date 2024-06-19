@@ -14,17 +14,27 @@ import Profile from "./pages/Profile/Profile";
 function App() {
   const dispatch = useDispatch();
   const telegramData = useSelector((state) => state.telegramData);
-
   useEffect(() => {
     getInitData()
   }, [])
+
+  useEffect(() => {
+    console.log("useEffect", telegramData?.user?.income_per_hour_by_cards)
+    if (telegramData?.user?.income_per_hour_by_cards) {
+      localStorage.setItem("passive_income", telegramData.user.income_per_hour_by_cards);
+    }
+  }, [telegramData]);
+
+  const resetLocalStorage = () => {
+    localStorage.removeItem("money");
+    localStorage.removeItem("energy");
+    localStorage.removeItem("passive_income");
+  }
 
   const getInitData = async () => {
     const urlParams = new URLSearchParams(window.location.search);
     let validatedData = await validateInitData(urlParams.get('from'));
     dispatch(setTelegramData(validatedData))
-    console.log("setIsAdmin")
-    console.log("refURL", validatedData.refURL)
     dispatch(setIsAdmin(validatedData?.user?.roles.includes("ADMIN")))
   }
 
