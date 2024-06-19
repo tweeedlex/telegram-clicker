@@ -40,7 +40,7 @@ module.exports = Router({mergeParams: true}).post(
         totalIncomePerHour += Math.trunc(income);
       }
       let incomePerMissingTime = Math.trunc((totalIncomePerHour / 3600) * Math.ceil(timeBetweenRequests / 1000))
-      const updatedUser = await db.User.findOneAndUpdate(
+      let updatedUser = await db.User.findOneAndUpdate(
         {id: user.id},
         {
           money: Math.trunc(user.money + validTaps * user.multiplier + incomePerMissingTime),
@@ -49,8 +49,9 @@ module.exports = Router({mergeParams: true}).post(
         },
         {new: true}
       );
-
-      return res.json(updatedUser);
+      uUser = {}
+      uUser.income_per_hour_by_cards = totalIncomePerHour;
+      return res.json(Object.assign(uUser, updatedUser._doc));
     } catch (error) {
       next(error);
     }
