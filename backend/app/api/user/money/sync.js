@@ -39,7 +39,7 @@ module.exports = Router({mergeParams: true}).post(
         let income = card.initialIncome * Math.pow(gameVariables.CARD_INCOME_MULTIPLIER, userCards[i].level + 1)
         totalIncomePerHour += Math.trunc(income);
       }
-      let incomePerMissingTime = Math.trunc((totalIncomePerHour / 3600) * Math.round(timeBetweenRequests / 1000))
+      let incomePerMissingTime = Math.trunc((totalIncomePerHour / 3600) * Math.ceil(timeBetweenRequests / 1000))
       const updatedUser = await db.User.findOneAndUpdate(
         {id: user.id},
         {
