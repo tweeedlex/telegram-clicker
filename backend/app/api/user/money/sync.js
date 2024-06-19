@@ -13,7 +13,6 @@ module.exports = Router({mergeParams: true}).post(
       }
 
       let now = new Date();
-
       const timeBetweenRequests = Math.trunc(Math.abs((user.last_money_request_timestamp) - now));
       let restoredTaps = (timeBetweenRequests / gameVariables.ENERGY_RECOVERY_INTERVAL) * gameVariables.ENERGY_RECOVERY;
 
@@ -33,11 +32,18 @@ module.exports = Router({mergeParams: true}).post(
       if (newAvailableTaps > gameVariables.ENERGY_LIMIT) {
         newAvailableTaps = gameVariables.ENERGY_LIMIT;
       }
-
+      let userCards = await db.UserCard.find({userId: user._id})
+      let totalIncomePerHour = 0;
+      for(var i = 0; i < userCards.length; i++){
+        let card = await db.Card.findById(userCards[i].cardId)
+        let income = card.initialIncome * Math.pow(gameVariables.CARD_INCOME_MULTIPLIER, userCards[i].level + 1)
+        totalIncomePerHour += Math.trunc(income);
+      }
+      let incomePerMissingTime = Math.trunc((totalIncomePerHour / 3600) * Math.round(timeBetweenRequests / 1000))
       const updatedUser = await db.User.findOneAndUpdate(
         {id: user.id},
         {
-          money: Math.trunc(user.money + validTaps * user.multiplier),
+          money: Math.trunc(user.money + validTaps * user.multiplier + incomePerMissingTime),
           availableTaps: Math.trunc(newAvailableTaps),
           last_money_request_timestamp: now
         },
