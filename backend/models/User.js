@@ -7,7 +7,7 @@
     money: {type: Number, default: 0},
     availableTaps: {type: Number, default: 1500},
     from: {type: Number, default: 0},
-    multiplier: {type: Number, default: 1},
+    level: {type: Number, default: 1},
     last_money_request_timestamp: {type: Number, default: 0},
     roles: { type: Array, default: ["USER"] },
     language_code: { type: String, default: "en" },

@@ -25,15 +25,15 @@ const Main = () => {
   };
 
   const updateLocalStateOnTap = () => {
-    const multiplier = telegramData.user.multiplier;
-    const newMoney = money + gameVariables.MONEY_PER_TAP * multiplier;
+    const level = telegramData.user.level;
+    const newMoney = money + gameVariables.MONEY_PER_TAP * level;
     const newEnergy = energy - gameVariables.ENERGY_PER_TAP;
 
     setMoney(newMoney);
     setEnergy(newEnergy);
 
     const localMoney = +localStorage.getItem('money');
-    localStorage.setItem('money', localMoney + gameVariables.MONEY_PER_TAP * multiplier);
+    localStorage.setItem('money', localMoney + gameVariables.MONEY_PER_TAP * level);
 
     const localEnergy = +localStorage.getItem('energy');
     localStorage.setItem('energy', localEnergy - gameVariables.ENERGY_PER_TAP);
@@ -57,6 +57,7 @@ const Main = () => {
       if (passiveIncome) {
         newMoney = money + passiveIncome / 3600;
       }
+      localStorage.setItem("money", newMoney);
       return newMoney;
     });
   }
@@ -106,6 +107,10 @@ const Main = () => {
       <header>
         <p>
           Welcome to the elephant clicker, {telegramData ? telegramData?.user?.first_name : ""}!
+        </p>
+        <br/>
+        <p>
+          Your level: {telegramData?.user?.level}
         </p>
       </header>
       <div className={styles.block}>

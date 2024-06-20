@@ -6,5 +6,22 @@ export default {
   MONEY_PER_TAP: 1,
   ENERGY_PER_TAP: 1,
   CARD_UPGRADE_MULTIPLIER: 1.5,
-  CARD_INCOME_MULTIPLIER: 1.3
+  CARD_INCOME_MULTIPLIER: 1.3,
+  MONEY_FOR_LEVELS: {
+    1: 0,
+    2: 100,
+    3: 1_000,
+    4: 5_000,
+    5: 20_000,
+    6: 50_000,
+    7: 100_000,
+    8: 500_000,
+    9: 1_000_000,
+    10: 5_000_000,
+    11: 20_000_000,
+    12: 50_000_000,
+    13: 100_000_000,
+    14: 500_000_000,
+    15: 1_000_000_000,
+  }
 }
