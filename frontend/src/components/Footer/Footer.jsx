@@ -6,6 +6,7 @@ import mainIcon from "../../img/footer/main.png"
 import mineIcon from "../../img/footer/mine.png"
 import profileIcon from "../../img/footer/profile.png"
 import adminIcon from "../../img/footer/admin.jpg"
+import earnIcon from "../../img/footer/earn.png"
 import {useSelector} from "react-redux";
 
 const Footer = () => {
@@ -28,6 +29,11 @@ const Footer = () => {
           <li>
             <Link to={routes.PROFILE}>
               <img width={42} src={profileIcon}/>
+            </Link>
+          </li>
+          <li>
+            <Link to={routes.EARN}>
+              <img width={42} src={earnIcon}/>
             </Link>
           </li>
           {

@@ -2,5 +2,6 @@ export default {
   MAIN: "/",
   MINE: "/mine",
   PROFILE: "/profile",
-  ADMIN: "/admin"
+  ADMIN: "/admin",
+  EARN: "/earn",
 }

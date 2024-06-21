@@ -6,4 +6,5 @@ export default {
     CARD: "/card",
     USER_MONEY: "/user/money",
     USER_REFS: "/user/refs",
+    USER_IS_SUBSCRIBED: "/user/isSubscribed",
 }

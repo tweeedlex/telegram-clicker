@@ -5,7 +5,6 @@ const hashids = new Hashids(process.env.HASHIDS_TOKEN, 10)
 const WEB_APP_URL = process.env.WEB_APP_URL
 
 function createTelegramBot() {
-    // console.log(hashids.encode(5643672679))
     const createTelegramBot = new Telegraf(process.env.BOT_TOKEN);
     const replyWithWebApp = (ctx, fromCommand=false) => {
         let fromUrlParam = ''
@@ -40,7 +39,6 @@ function createTelegramBot() {
         console.log('Bot is running');
     });
 
-    // Enable graceful stop
     process.once('SIGINT', () => createTelegramBot.stop('SIGINT'));
     process.once('SIGTERM', () => createTelegramBot.stop('SIGTERM'));
 }

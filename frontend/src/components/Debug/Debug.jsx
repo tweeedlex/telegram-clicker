@@ -1,5 +1,5 @@
 import React from 'react';
-import { createCard } from "../../http/card";
+import axios from "axios";
 
 const Debug = ({isVisible}) => {
   const testRequests = async () => {

@@ -10,6 +10,7 @@ import Debug from "./components/Debug/Debug";
 import Mine from "./pages/Mine/Mine";
 import Admin from "./pages/Admin/Admin";
 import Profile from "./pages/Profile/Profile";
+import Earn from "./pages/Earn/Earn";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ function App() {
           <Route path={routes.MAIN} element={<Main />} />
           <Route path={routes.MINE} element={<Mine />} />
           <Route path={routes.PROFILE} element={<Profile />}/>
+          <Route path={routes.EARN} element={<Earn />}/>
           {
             telegramData?.user?.roles.includes("ADMIN") &&
             <Route path={routes.ADMIN} element={<Admin />} />
