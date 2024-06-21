@@ -12,3 +12,7 @@ export const syncMoney = async (money, dispatch, telegramData, setTelegramData) 
         dispatch(setTelegramData({...telegramData, user}));
     }
 }
+
+export const getUserRefs = async () => {
+    return apiRequest('get', routes.USER_REFS);
+}

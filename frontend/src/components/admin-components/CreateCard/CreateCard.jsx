@@ -16,6 +16,8 @@ const CreateCard = ({ categoryId, getCards }) => {
         name: "",
         initialPrice: "",
         initialIncome: "",
+        maxLevel: "",
+        referralsRequired: "",
         categoryId,
         img: null
       }}

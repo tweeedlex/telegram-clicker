@@ -38,12 +38,12 @@ const Mine = () => {
   }
 
   const handleBuyCard = async (cardId) => {
-    const data = await buyCard(cardId)
-    if (data?.error && data?.status === 400) {
-      return window.Telegram.WebApp.showPopup({message: "Not enough money to buy this card"})
+    const response = await buyCard(cardId)
+    if (response?.error && response?.status === 400) {
+      return window.Telegram.WebApp.showPopup({message: response.data.message})
     }
 
-    const {user, newUserCard} = data;
+    const {user, newUserCard} = response;
 
     dispatch(setTelegramData({...telegramData, user}))
     localStorage.setItem("money", user.money)
@@ -85,18 +85,30 @@ const Mine = () => {
               </p>
               <p>
                 Price: ${
-                  card.userCard
-                    ? (card.initialPrice * Math.pow(gameVariables.CARD_UPGRADE_MULTIPLIER, card.userCard?.level + 1)).toFixed(2)
-                    : card.initialPrice
-                }
+                card.userCard
+                  ? (card.initialPrice * Math.pow(gameVariables.CARD_UPGRADE_MULTIPLIER, card.userCard?.level + 1)).toFixed(2)
+                  : card.initialPrice
+              }
               </p>
               <p>
                 New profit: + ${
                 card.userCard
                   ? (card.initialIncome * Math.pow(gameVariables.CARD_INCOME_MULTIPLIER, card.userCard?.level + 1)).toFixed(2)
                   : card.initialIncome
-                }/h
+              }/h
               </p>
+
+              {
+                card.referralsRequired > 0
+                  && <p>Referrals required: {card.referralsRequired}</p>
+              }
+
+              {
+                card.maxLevel > 0
+                && <p>Max level: {card.maxLevel}</p>
+              }
+
+
               <p>
                 {card.userCard?.level
                   ? `Level: ${card.userCard?.level}`
@@ -105,7 +117,7 @@ const Mine = () => {
               </p>
               {
                 isAdmin && (
-                  <EditCard categoryId={activeCategory} card={card} getCards={handleGetCards} />
+                  <EditCard categoryId={activeCategory} card={card} getCards={handleGetCards}/>
                 )
               }
             </div>
@@ -113,7 +125,7 @@ const Mine = () => {
         }
         {
           isAdmin && (
-            <CreateCard categoryId={activeCategory} getCards={handleGetCards} />
+            <CreateCard categoryId={activeCategory} getCards={handleGetCards}/>
           )
         }
       </div>

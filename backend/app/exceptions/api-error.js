@@ -3,7 +3,8 @@ module.exports = class ApiError extends Error {
   errors;
 
   constructor(status, message, errors = []) {
-    super(message);
+    super();
+    this.message = message;
     this.status = status;
     this.errors = errors;
   }

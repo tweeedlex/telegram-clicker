@@ -28,13 +28,13 @@ const CardForm = ({ initialCardInfo, onSubmit, buttonText, styles }) => {
   return (
     <form ref={createCardForm} onSubmit={handleSubmit} className={styles.card}>
       {previewImage ? (
-        <img src={previewImage} alt="Preview" />
+        <img src={previewImage} alt="Preview"/>
       ) : (
         <img src={
           initialCardInfo.img
             ? `${(import.meta.env.VITE_API_URL?.split("/api")[0] ?? "")}/img/${initialCardInfo.img}`
             : "https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg"
-        } width={60} alt="Example" />
+        } width={60} alt="Example"/>
       )}
       <input
         name="img"
@@ -48,7 +48,7 @@ const CardForm = ({ initialCardInfo, onSubmit, buttonText, styles }) => {
         name="name"
         placeholder="Name"
         value={cardInfo.name}
-        onChange={(e) => setCardInfo({ ...cardInfo, name: e.target.value })}
+        onChange={(e) => setCardInfo({...cardInfo, name: e.target.value})}
       />
       <input
         className={"input-default " + styles.input}
@@ -56,7 +56,7 @@ const CardForm = ({ initialCardInfo, onSubmit, buttonText, styles }) => {
         placeholder="Initial price"
         type="number"
         value={cardInfo.initialPrice}
-        onChange={(e) => setCardInfo({ ...cardInfo, initialPrice: e.target.value })}
+        onChange={(e) => setCardInfo({...cardInfo, initialPrice: e.target.value})}
       />
       <input
         className={"input-default " + styles.input}
@@ -64,7 +64,23 @@ const CardForm = ({ initialCardInfo, onSubmit, buttonText, styles }) => {
         placeholder="Initial income"
         type="number"
         value={cardInfo.initialIncome}
-        onChange={(e) => setCardInfo({ ...cardInfo, initialIncome: e.target.value })}
+        onChange={(e) => setCardInfo({...cardInfo, initialIncome: e.target.value})}
+      />
+      <input
+        className={"input-default " + styles.input}
+        name="maxLevel"
+        placeholder="Max level (0)"
+        type="number"
+        value={cardInfo.maxLevel}
+        onChange={(e) => setCardInfo({...cardInfo, maxLevel: e.target.value})}
+      />
+      <input
+        className={"input-default " + styles.input}
+        name="referralsRequired"
+        placeholder="Refs required (0)"
+        type="number"
+        value={cardInfo.referralsRequired}
+        onChange={(e) => setCardInfo({...cardInfo, referralsRequired: e.target.value})}
       />
       <button type="submit" className="button-default">
         {buttonText}

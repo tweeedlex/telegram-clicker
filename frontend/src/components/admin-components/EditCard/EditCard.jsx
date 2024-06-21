@@ -27,6 +27,8 @@ const EditCard = ({ categoryId, getCards, card }) => {
             name: card.name,
             initialPrice: card.initialPrice,
             initialIncome: card.initialIncome,
+            maxLevel: card.maxLevel,
+            referralsRequired: card.referralsRequired,
             categoryId,
             img: card.img
           }}

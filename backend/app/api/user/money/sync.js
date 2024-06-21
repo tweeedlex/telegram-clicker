@@ -17,8 +17,8 @@ module.exports = Router({ mergeParams: true }).post(
       const restoredTaps = calculateRestoredTaps(timeBetweenRequests);
       const { validTaps, newAvailableTaps } = calculateValidTaps(user, money, restoredTaps);
 
-      const totalIncomePerHour = await calculateTotalIncomePerHour(db, user._id);
-      const incomePerMissingTime = calculateIncomePerMissingTime(totalIncomePerHour, timeBetweenRequests);
+      const totalIncomePerHour = await calculateTotalIncomePerHour(db, user._id, user.level);
+      const incomePerMissingTime = calculateIncomePerMissingTime(totalIncomePerHour, timeBetweenRequests, user.level);
 
       let updatedMoney = Math.trunc(user.money + validTaps * user.level + incomePerMissingTime);
 
@@ -59,19 +59,27 @@ function calculateValidTaps(user, money, restoredTaps) {
   return { validTaps, newAvailableTaps };
 }
 
-async function calculateTotalIncomePerHour(db, userId) {
+async function calculateTotalIncomePerHour(db, userId, userLevel) {
   const cards = await db.Card.find({});
   const userCards = await db.UserCard.find({ userId });
 
   return userCards.reduce((totalIncome, userCard) => {
     const card = cards.find(card => card._id.equals(userCard.cardId));
-    const income = card.initialIncome * Math.pow(gameVariables.CARD_INCOME_MULTIPLIER, userCard.level + 1);
+    const rawIncome = card.initialIncome * Math.pow(gameVariables.CARD_INCOME_MULTIPLIER, userCard.level + 1);
+    const multiplier = (userLevel / 10 + 0.9);
+    const income = rawIncome * multiplier;
     return totalIncome + Math.trunc(income);
   }, 0);
 }
 
-function calculateIncomePerMissingTime(totalIncomePerHour, timeBetweenRequests) {
-  return Math.trunc((totalIncomePerHour / 3600) * Math.ceil(timeBetweenRequests / 1000));
+function calculateIncomePerMissingTime(totalIncomePerHour, timeBetweenRequests, userLevel) {
+  let missingTime = Math.ceil(timeBetweenRequests / 1000);
+  if (missingTime > gameVariables.MISSING_TIME_LIMIT_SECONDS) {
+    missingTime = gameVariables.MISSING_TIME_LIMIT_SECONDS;
+  }
+  const rawIncome = totalIncomePerHour / 3600 * missingTime;
+  const levelMultiplier = (userLevel / 10 + 0.9)
+  return Math.trunc(rawIncome * levelMultiplier);
 }
 
 function determineLevel(money, moneyForLevels) {

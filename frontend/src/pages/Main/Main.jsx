@@ -115,18 +115,21 @@ const Main = () => {
       </header>
       <div className={styles.block}>
         <button className={styles.button} onClick={handleTap}>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg" alt="slon" width={250} />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg" alt="slon"
+               width={250}/>
         </button>
         <div>
           <p>Your balance</p>
-          <p style={{ fontSize: 40 }}>{Math.floor(money)}</p>
+          <p style={{fontSize: 40}}>{Math.floor(money)}</p>
           <p>dollars.</p>
         </div>
         <div>
           <p>Energy: {energy}</p>
         </div>
         <div>
-          Passive income: ${(telegramData?.user?.income_per_hour_by_cards || localStorage.getItem("passive_income")) ?? 0}/h
+          Passive income:
+          ${(telegramData?.user?.income_per_hour_by_cards || localStorage.getItem("passive_income")) ?? 0}/h
+          (x{(telegramData?.user?.level / 10 + 0.9).toFixed(1)})
         </div>
       </div>
     </div>

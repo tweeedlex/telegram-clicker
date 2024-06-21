@@ -8,7 +8,7 @@ module.exports = Router({ mergeParams: true }).put(
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const { name, initialPrice, initialIncome, categoryId } = req.body;
+      const { name, initialPrice, initialIncome, categoryId, maxLevel, referralsRequired } = req.body;
       const { db, ApiError } = req;
 
       const card = await db.Card.findOne({_id: id});
@@ -40,7 +40,15 @@ module.exports = Router({ mergeParams: true }).put(
       }
 
       // Update card details
-      await card.update({ name, img: imgName, initialPrice, initialIncome, categoryId });
+      await card.update({
+        name,
+        img: imgName,
+        initialPrice,
+        initialIncome,
+        categoryId,
+        maxLevel: maxLevel || 0,
+        referralsRequired: referralsRequired || 0
+      });
 
       return res.json(card);
     } catch (error) {

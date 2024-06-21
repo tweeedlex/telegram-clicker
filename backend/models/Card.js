@@ -6,4 +6,6 @@ const cardSchema = (module.exports = mongoose.Schema({
   initialPrice: { type: Number, default: 0 },
   initialIncome: { type: Number, default: 0 },
   categoryId: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+  maxLevel: { type: Number, default: 0 },
+  referralsRequired: { type: Number, default: 0 },
 }));

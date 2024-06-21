@@ -7,7 +7,7 @@ module.exports = Router({ mergeParams: true }).post(
   "/admin/card",
   async (req, res, next) => {
     try {
-      const { name, initialPrice, initialIncome, categoryId } = req.body;
+      const { name, initialPrice, initialIncome, categoryId, referralsRequired, maxLevel } = req.body;
       const { db, ApiError } = req;
       console.log(name, initialPrice, initialIncome, categoryId)
 
@@ -27,7 +27,15 @@ module.exports = Router({ mergeParams: true }).post(
 
       await img.mv(imgPath);
 
-      const newCard = await db.Card.create({ name, img: imgName, initialPrice, initialIncome, categoryId });
+      const newCard = await db.Card.create({
+        name,
+        img: imgName,
+        initialPrice,
+        initialIncome,
+        categoryId,
+        maxLevel: maxLevel || 0,
+        referralsRequired: referralsRequired || 0
+      });
       return res.json(newCard);
     } catch (error) {
       next(error);
