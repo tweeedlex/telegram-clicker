@@ -16,3 +16,7 @@ export const syncMoney = async (money, dispatch, telegramData, setTelegramData) 
 export const getUserRefs = async () => {
     return apiRequest('get', routes.USER_REFS);
 }
+
+export const getIsSubscribed = async () => {
+    return apiRequest('get', routes.USER_IS_SUBSCRIBED);
+}
