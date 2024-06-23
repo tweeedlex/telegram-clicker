@@ -35,7 +35,9 @@ server
   })
   .listen(port);
 
-const createTelegramBot = require("./bot/createTelegramBot")
+const createTelegramBot = require("./telegram-bot/createTelegramBot")
+const createTelegramClient = require("./telegram-client/createTelegramClient")
 createTelegramBot();
+createTelegramClient(database);
 
 module.exports = server;
