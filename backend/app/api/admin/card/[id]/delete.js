@@ -1,10 +1,10 @@
 const { Router } = require("express");
 
 module.exports = Router({ mergeParams: true }).delete(
-  "/admin/category",
+  "/admin/card/:id",
   async (req, res, next) => {
     try {
-      const { id } = req.body;
+      const { id } = req.params;
       const { db, ApiError } = req;
 
       if (!id) {

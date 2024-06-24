@@ -2,7 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import styles from "./Mine.module.scss";
 import {getAllCategories} from "../../http/category";
 import Debug from "../../components/Debug/Debug";
-import {buyCard, getCards} from "../../http/card";
+import {buyCard, deleteCard, getCards} from "../../http/card";
 import {useDispatch, useSelector} from "react-redux";
 import CreateCard from "../../components/admin-components/CreateCard/CreateCard";
 import EditCard from "../../components/admin-components/EditCard/EditCard";
@@ -58,6 +58,12 @@ const Mine = () => {
     setCards(newCards)
   }
 
+  const handleDeleteCard = async (e, cardId) => {
+    e.stopPropagation()
+    await deleteCard(cardId)
+    await handleGetCards()
+  }
+
   return (
     <div className={"page " + styles.minePage}>
       <div className={styles.categories}>
@@ -100,7 +106,7 @@ const Mine = () => {
 
               {
                 card.referralsRequired > 0
-                  && <p>Referrals required: {card.referralsRequired}</p>
+                && <p>Referrals required: {card.referralsRequired}</p>
               }
 
               {
@@ -117,7 +123,10 @@ const Mine = () => {
               </p>
               {
                 isAdmin && (
-                  <EditCard categoryId={activeCategory} card={card} getCards={handleGetCards}/>
+                  <>
+                    <EditCard categoryId={activeCategory} card={card} getCards={handleGetCards}/>
+                    <button onClick={(e) => handleDeleteCard(e, card._id)} className={"button-default"}>Delete</button>
+                  </>
                 )
               }
             </div>

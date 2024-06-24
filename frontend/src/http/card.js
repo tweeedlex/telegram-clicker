@@ -16,3 +16,7 @@ export const updateCard = (cardId, formData) => {
 export const buyCard = (cardId) => {
   return apiRequest('post', routes.CARD + `/${cardId}`);
 }
+
+export const deleteCard = (cardId) => {
+  return apiRequest('delete', routes.ADMIN_CARD + `/${cardId}`);
+}

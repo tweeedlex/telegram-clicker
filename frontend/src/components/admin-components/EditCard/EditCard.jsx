@@ -19,7 +19,7 @@ const EditCard = ({ categoryId, getCards, card }) => {
   };
 
   return (
-    <>
+    <div onClick={e => e.stopPropagation()}>
       <button className="button-default" onClick={handleEditClick}>Edit card</button>
       <Modal title={`Edit card: ${card.name}`} show={isModalActive} onClose={() => setIsModalActive(false)}>
         <CardForm
@@ -37,7 +37,7 @@ const EditCard = ({ categoryId, getCards, card }) => {
           styles={styles}
         />
       </Modal>
-    </>
+    </div>
   );
 };
 
