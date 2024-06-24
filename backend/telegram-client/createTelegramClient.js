@@ -6,6 +6,24 @@ const lodash = require('lodash');
 
 let previousResult = null;
 
+// async function createTelegramClient(db) {
+//   const {TELEGRAM_API_ID, TELEGRAM_API_HASH, TELEGRAM_SESSION_STRING, TELEGRAM_CHANNEL} = process.env;
+//   const session = new StringSession("");
+//   const client = new TelegramClient(session, +TELEGRAM_API_ID, TELEGRAM_API_HASH, {});
+//
+//   await client.start({
+//     phoneNumber: async () => await input.text("Enter your phone number:"),
+//     password: async () => await input.text("Enter your password:"),
+//     phoneCode: async () => await input.text("Enter the code you received:")
+//   })
+//   console.log(client.session.save())
+//
+//   // await client.connect();
+//   // setInterval(() => {
+//   //   getChannelLogs(client, db, TELEGRAM_CHANNEL);
+//   // }, 10 * 1000);
+// }
+
 async function createTelegramClient(db) {
   const {TELEGRAM_API_ID, TELEGRAM_API_HASH, TELEGRAM_SESSION_STRING, TELEGRAM_CHANNEL} = process.env;
   const session = new StringSession(TELEGRAM_SESSION_STRING);

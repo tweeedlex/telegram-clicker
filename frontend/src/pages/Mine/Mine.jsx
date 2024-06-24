@@ -83,9 +83,12 @@ const Mine = () => {
         {
           cards?.map((card) => (
             <div className={styles.card} key={card._id} onClick={() => handleBuyCard(card._id)}>
-              <img src={
-                (import.meta.env.VITE_API_URL?.split("/api")[0] ?? "") + "/img/" + card.img
-              } alt={card.name}/>
+              <img
+                src={
+                  (import.meta.env.VITE_API_URL?.split("/api")[0] ?? "") + "/img/" + card.img
+                }
+                alt=""
+              />
               <p>
                 {card.name}
               </p>
