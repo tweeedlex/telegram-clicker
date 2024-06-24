@@ -3,6 +3,7 @@ const {StringSession} = require("telegram/sessions");
 const fs = require('fs');
 const path = require('path');
 const lodash = require('lodash');
+const input = require("input")
 
 let previousResult = null;
 
